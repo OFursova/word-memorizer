@@ -18,7 +18,7 @@
                     <x-jet-nav-link href="{{ route('words.index') }}" :active="request()->routeIs('words.index')">
                         {{ __('Words') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('user.words') }}" :active="request()->routeIs('user.words')">
+                    <x-jet-nav-link href="{{ route('user.words.index') }}" :active="request()->routeIs('user.words.index')">
                         {{ __('Vocabulary') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('training.index') }}" :active="request()->routeIs('training.index')">
@@ -156,7 +156,7 @@
             <x-jet-responsive-nav-link href="{{ route('words.index') }}" :active="request()->routeIs('words')">
                 {{ __('Words') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('user.words') }}" :active="request()->routeIs('user.words')">
+            <x-jet-responsive-nav-link href="{{ route('user.words.index') }}" :active="request()->routeIs('user.words.index')">
                 {{ __('Vocabulary') }}
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('training.index') }}" :active="request()->routeIs('training')">

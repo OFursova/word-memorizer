@@ -28,15 +28,13 @@ class UpdateWordRequest extends FormRequest
             'translation' => ['required', 'string'],
             'other_meanings' => ['nullable'],
             'grammar_class_id' => ['required', 'exists:grammar_classes,id'],
-            'added_by' => ['required', 'exists:users,id'],
         ];
     }
 
     protected function prepareForValidation()
     {
         $this->merge([
-            'added_by' => auth()->id(),
-            'other_meanings' => json_encode(request('meanings')),
+            'other_meanings' => request('meanings'),
         ]);
     }
 }

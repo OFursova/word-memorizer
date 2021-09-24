@@ -8,14 +8,10 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class TrainingController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
      * @return Application|Factory|View
      */
     public function index()
@@ -24,77 +20,14 @@ class TrainingController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function seedVariants()
     {
-        $words = Word::where('grammar_class_id', '!=', 8)->get(['other_meanings', 'grammar_class_id']);
+        $words = Word::where('grammar_class_id', '!=', 8)->get(['id', 'other_meanings', 'grammar_class_id']);
 
         foreach ($words as $word) {
-            $vars = json_decode($word->other_meanings);
+            $vars = $word->other_meanings;
 
             if (!is_null($vars)) {
                 for ($i = 0; $i < count($vars); $i++) {

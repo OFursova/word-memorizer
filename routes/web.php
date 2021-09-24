@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\UserWordsController;
 use App\Http\Controllers\WordController;
 use App\Http\Controllers\TrainingController;
 use Illuminate\Support\Facades\Route;
@@ -25,10 +26,13 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/user/words', [WordController::class, 'userWords'])->name('user.words');
     Route::resource('/words', WordController::class);
-    Route::resource('/training', TrainingController::class);
 
+    Route::prefix('user')->name('user.')->group(function () {
+        Route::resource('/words', UserWordsController::class);
+    });
+
+    Route::get('/training', [TrainingController::class, 'index'])->name('training.index');
     Route::get('/seed-variants', [TrainingController::class, 'seedVariants'])->name('seed-variants');
     Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics');
 });

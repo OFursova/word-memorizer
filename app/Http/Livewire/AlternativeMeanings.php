@@ -2,20 +2,17 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Word;
 use Livewire\Component;
 
 class AlternativeMeanings extends Component
 {
-    public $currentWord;
-    public $meanings = [];
+    public Word $currentWord;
+    public array $meanings = [];
 
     public function mount()
     {
-        if ($this->currentWord){
-            $this->meanings = $this->currentWord->other_meanings ? json_decode($this->currentWord->other_meanings) : [''];
-        } else {
-            $this->meanings = [''];
-        }
+        $this->meanings = $this->currentWord->other_meanings ?? [''];
     }
 
     public function render()

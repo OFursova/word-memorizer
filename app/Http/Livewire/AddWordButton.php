@@ -6,11 +6,11 @@ use Livewire\Component;
 
 class AddWordButton extends Component
 {
-    public $wordId;
+    public int $wordId;
 
     public function render()
     {
-        $alreadyAdded = auth()->user()->words()->get()->contains($this->wordId);
+        $alreadyAdded = auth()->user()->words()->whereId($this->wordId)->exists();
 
         return view('livewire.add-word-button', compact('alreadyAdded'));
     }

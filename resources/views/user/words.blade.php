@@ -72,6 +72,14 @@
                                             Delete
                                         </x-jet-danger-button>
                                     </form>
+                                @else
+                                    <form action="{{ route('user.words.destroy', $word) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <x-jet-danger-button type="submit">
+                                        Remove
+                                    </x-jet-danger-button>
+                                    </form>
                                 @endcan
                             </td>
                         </tr>

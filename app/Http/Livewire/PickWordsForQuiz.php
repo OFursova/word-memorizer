@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Word;
 use Livewire\Component;
 
 class PickWordsForQuiz extends Component
 {
-    public $word;
+    public Word $word;
 
     public function render()
     {

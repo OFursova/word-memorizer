@@ -11,8 +11,20 @@ class QuizHistory extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'words' => 'array',
+    ];
+
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model){
+            $model->user_id = auth()->id();
+        });
     }
 }

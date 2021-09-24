@@ -15,4 +15,12 @@ class WordTry extends Model
     {
         return $this->belongsTo(Word::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model){
+            $model->user_id = auth()->id();
+        });
+    }
 }

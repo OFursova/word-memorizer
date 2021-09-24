@@ -33,6 +33,8 @@ But if you'd like to use **Memorizer** properly - visit **Start training** page 
 
 If you have registered - you can add words to your vocabulary from the **Words** section. Then you can pick words you want to master from **Vocabulary** page and start a **Custom Quiz**.
 
+Totally recommendable is to click **Seed variants** button on **Start training** page - it will enhance your practicing experience by making guessing a little bit harder.
+
 ## Future releases
 
-Future releases will have filtering by *Category*, testing your skills in *Test mode* and many others. 
+Future releases will have filtering by *Category*, testing your skills in *Test mode*, **Statistics** section and many other features. 

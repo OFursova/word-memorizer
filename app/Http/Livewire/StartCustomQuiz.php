@@ -3,12 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Models\QuizHistory;
+use App\Models\Word;
 use Livewire\Component;
 
 class StartCustomQuiz extends Component
 {
-    public $words = [];
-    public $word;
+    public array $words = [];
+    public Word $word;
 
     protected $listeners = ['addedToQuiz'];
 
@@ -17,7 +18,7 @@ class StartCustomQuiz extends Component
         return view('livewire.start-custom-quiz');
     }
 
-    public function addedToQuiz($word)
+    public function addedToQuiz(Word $word)
     {
         $this->words[] = $word['id'];
     }
@@ -25,9 +26,9 @@ class StartCustomQuiz extends Component
     public function sendWords()
     {
         $quiz = QuizHistory::create([
-                'user_id' => auth()->id(),
-                'words' => json_encode($this->words)
-            ]);
+            'words' => $this->words,
+            'quiz_type' => 'custom'
+        ]);
         return redirect()->route('training.index', ['custom' => true, 'quiz' => $quiz->id]);
     }
 }

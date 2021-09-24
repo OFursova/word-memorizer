@@ -10,7 +10,7 @@ class AddedWordsBanner extends Component
 
     public function render()
     {
-        $addedAmount = auth()->user()->words()->count();
+        $addedAmount = auth()->user()->words()->count('id');
 
         return view('livewire.added-words-banner', compact('addedAmount'));
     }

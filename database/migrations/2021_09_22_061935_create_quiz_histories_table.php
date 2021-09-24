@@ -16,7 +16,7 @@ class CreateQuizHistoriesTable extends Migration
         Schema::create('quiz_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('quiz_type')->default('custom');
+            $table->string('quiz_type')->nullable();
             $table->json('words');
             $table->timestamps();
         });

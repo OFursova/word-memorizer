@@ -72,7 +72,7 @@ class WordController extends Controller
         $word->users()->attach(auth()->id());
         $word->categories()->attach(request()->categories);
 
-        return redirect()->route('user.words');
+        return redirect()->route('user.words.index');
     }
 
     /**
@@ -99,13 +99,13 @@ class WordController extends Controller
      */
     public function update(UpdateWordRequest $request, Word $word)
     {
-//        $this->authorize('update');
+        $this->authorize('update', $word);
 
         $word->update($request->validated());
         $word->users()->sync(auth()->id());
         $word->categories()->sync(request()->categories);
 
-        return redirect()->route('user.words');
+        return redirect()->route('user.words.index');
     }
 
     /**
@@ -116,27 +116,9 @@ class WordController extends Controller
      */
     public function destroy(Word $word)
     {
-//        $this->authorize('delete');
-        if ($word->added_by == auth()->id() || auth()->id() == 1) {
-            $word->delete();
-        } else {
-            $word->users()->detach(auth()->id());
-        }
+        $this->authorize('delete', $word);
+        $word->delete();
 
-        return redirect()->route('user.words');
-    }
-
-    /**
-     * @return Application|Factory|View
-     */
-    public function userWords()
-    {
-        $words = auth()->user()->words()
-            ->with(['categories', 'grammarClass'])
-            ->withCount('tries')
-            ->paginate(20)
-            ->withQueryString();
-
-        return view('user.words', compact('words'));
+        return redirect()->route('user.words.index');
     }
 }

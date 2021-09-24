@@ -53,7 +53,7 @@ class WordPolicy
      */
     public function update(User $user, Word $word)
     {
-        return $user->id == $word->added_by || 1;
+        return $user->id == $word->added_by || $user->id == 1;
     }
 
     /**
@@ -65,7 +65,7 @@ class WordPolicy
      */
     public function delete(User $user, Word $word)
     {
-        return $user->id == $word->added_by || 1;
+        return $user->id == $word->added_by || $user->id == 1;
     }
 
     /**

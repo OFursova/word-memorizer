@@ -10,23 +10,23 @@ use Livewire\Component;
 
 class CustomQuiz extends Component
 {
-    public $words = [];
-    public $quizStarted = false;
-    public $round = 0;
-    public $maxRounds = 5;
-    public $set = [];
+    public array $words = [];
+    public bool $quizStarted = false;
+    public int $round = 0;
+    public int $maxRounds = 5;
+    public array $set = [];
     public $quizId;
 
     public function mount() {
-        $this->quizId ?? auth()->user()->quizHistory()->latest()->first()->id;
-        $this->words = json_decode(QuizHistory::where('id', $this->quizId)->value('words'));
+        $this->quizId  = $this->quizId ?? auth()->user()->quizHistory()->where('quiz_type', 'custom')->latest()->value('id');
+        $this->words = QuizHistory::where('id', $this->quizId)->value('words');
         $this->maxRounds = count($this->words);
     }
 
     public function render()
     {
-        $tries = auth()->user()->tries()->latest()->whereIn('word_id', $this->words)->limit($this->maxRounds)->get();
-        $lastResults = $tries->where('result', 1)->count();
+        $tries = auth()->user()->tries()->whereIn('word_id', $this->words)->latest()->limit($this->maxRounds)->get();
+        $lastResults = $tries->where('result', 1)->count('id');
         $freshResult = $tries->first() ? $tries->first()->created_at > now()->subMinutes(5) : false;
 
         return view('livewire.custom-quiz', compact('lastResults', 'freshResult'));
@@ -38,21 +38,19 @@ class CustomQuiz extends Component
         $words = Word::whereIn('id', $this->words)->get(['id', 'name', 'translation', 'grammar_class_id']);
         $variants = Variant::get(['name', 'grammar_class_id']);
 
-        for ($i = 0; $i < count($words); $i++) {
-            if ($words[$i]->grammar_class_id == 8) {
-                $words[$i]->grammar_class_id = rand(1,3);
+        $this->set = $words->map(function($word) use ($variants) {
+            if ($word->grammar_class_id == 8) {
+                $word->grammar_class_id = rand(1,3);
             }
-            $vars = $variants->where('word_id', '!=', $words[$i]->id)->where('grammar_class_id', $words[$i]->grammar_class_id)->toArray();
+            $vars = $variants->where('word_id', '!=', $word->id)->where('grammar_class_id', $word->grammar_class_id)->toArray();
             shuffle($vars);
-;
-            $arr = [$words[$i]->translation, $vars[0]['name'], $vars[1]['name'], $vars[2]['name']];
+
+            $arr = [$word->translation, $vars[0]['name'], $vars[1]['name'], $vars[2]['name']];
             shuffle($arr);
 
-            $this->set[] = [
-                'word' => $words[$i]->name,
-                'vars' => $arr
-            ];
-        }
+            return ['word' => $word->name, 'vars' => $arr];
+        })->toArray();
+
         return view('livewire.random-quiz');
     }
 
@@ -62,14 +60,13 @@ class CustomQuiz extends Component
         $result = false;
 
         $word = Word::where('name', $this->set[$this->round]['word'])->first();
-        $meanings = json_decode($word->other_meanings);
+        $meanings = $word->other_meanings;
 
         if ($word->translation == $variant || ($meanings && in_array($variant, $meanings))) {
             $result = true;
         }
 
         WordTry::create([
-            'user_id' => auth()->id(),
             'word_id' => $word->id,
             'result' => $result,
         ]);

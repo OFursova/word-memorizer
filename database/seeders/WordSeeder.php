@@ -23,7 +23,7 @@ class WordSeeder extends Seeder
             [
                 'name' => 'incentivize',
                 'translation' => 'стимулировать',
-                'other_meanings' => json_encode(['побуждать']),
+                'other_meanings' => ['побуждать'],
                 'grammar_class_id' => 1,
                 'added_by' => $admin,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -32,7 +32,7 @@ class WordSeeder extends Seeder
             [
                 'name' => 'infeasible',
                 'translation' => 'невыполнимый',
-                'other_meanings' => json_encode(['неосуществимый', 'неисполнимый']),
+                'other_meanings' => ['неосуществимый', 'неисполнимый'],
                 'grammar_class_id' => 3,
                 'added_by' => $admin,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -41,7 +41,7 @@ class WordSeeder extends Seeder
             [
                 'name' => 'substantial',
                 'translation' => 'существенный',
-                'other_meanings' => json_encode(['значительный', 'важный', 'сытный', 'реальный', 'прочный', 'состоятельный']),
+                'other_meanings' => ['значительный', 'важный', 'сытный', 'реальный', 'прочный', 'состоятельный'],
                 'grammar_class_id' => 3,
                 'added_by' => $admin,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -50,7 +50,7 @@ class WordSeeder extends Seeder
             [
                 'name' => 'obnoxious',
                 'translation' => 'неприятный',
-                'other_meanings' => json_encode(['противный', 'отвратительный', 'несносный']),
+                'other_meanings' => ['противный', 'отвратительный', 'несносный'],
                 'grammar_class_id' => 3,
                 'added_by' => $admin,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -59,7 +59,7 @@ class WordSeeder extends Seeder
             [
                 'name' => 'yield',
                 'translation' => 'доходность',
-                'other_meanings' => json_encode(['урожай', 'выработка', 'сбор плодов', 'количество добытого продукта']),
+                'other_meanings' => ['урожай', 'выработка', 'сбор плодов', 'количество добытого продукта'],
                 'grammar_class_id' => 2,
                 'added_by' => $admin,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -68,7 +68,7 @@ class WordSeeder extends Seeder
             [
                 'name' => 'concurrency',
                 'translation' => 'совпадение',
-                'other_meanings' => json_encode(['согласие', 'стечение обстоятельств', 'согласованность']),
+                'other_meanings' => ['согласие', 'стечение обстоятельств', 'согласованность'],
                 'grammar_class_id' => 2,
                 'added_by' => $admin,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -77,7 +77,7 @@ class WordSeeder extends Seeder
             [
                 'name' => 'quirk',
                 'translation' => 'причуда',
-                'other_meanings' => json_encode(['галтель', 'бзик', 'выверт', 'игра слов', 'каламбур', 'завиток', 'выкрутасы']),
+                'other_meanings' => ['галтель', 'бзик', 'выверт', 'игра слов', 'каламбур', 'завиток', 'выкрутасы'],
                 'grammar_class_id' => 2,
                 'added_by' => $admin,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -86,7 +86,7 @@ class WordSeeder extends Seeder
             [
                 'name' => 'mitigate',
                 'translation' => 'смягчать',
-                'other_meanings' => json_encode(['уменьшать', 'облегчать', 'умерять', 'успокаивать боль']),
+                'other_meanings' => ['уменьшать', 'облегчать', 'умерять', 'успокаивать боль'],
                 'grammar_class_id' => 1,
                 'added_by' => $admin,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -95,7 +95,7 @@ class WordSeeder extends Seeder
             [
                 'name' => 'collude',
                 'translation' => 'вступать в сговор',
-                'other_meanings' => json_encode(['тайно сговариваться']),
+                'other_meanings' => ['тайно сговариваться'],
                 'grammar_class_id' => 1,
                 'added_by' => $admin,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -104,7 +104,7 @@ class WordSeeder extends Seeder
             [
                 'name' => 'meander',
                 'translation' => 'извилистый',
-                'other_meanings' => json_encode(['змеится', 'извиваться', 'бродить без цели']),
+                'other_meanings' => ['змеится', 'извиваться', 'бродить без цели'],
                 'grammar_class_id' => 8,
                 'added_by' => $admin,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
